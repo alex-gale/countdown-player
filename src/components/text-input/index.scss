@@ -1,0 +1,45 @@
+.text-input-container {
+  display: flex;
+  width: 100%;
+  border: 5px solid lighten(black, 20%);
+
+  * {
+    font-size: 20px;
+  }
+
+  .text-input-label {
+    width: 120px;
+    text-align: center;
+    padding: 10px;
+    background-color: #37714A;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+
+    @media only screen and (max-width: 390px) {
+      font-size: 15px;
+      width: 100px;
+    }
+  }
+
+  .text-input {
+    flex: 1;
+    max-width: 100%;
+    min-width: 0px;
+    padding: 5px;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[type=number] {
+      -moz-appearance: textfield;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.button {
+  min-width: 200px;
+  border: 0px;
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #6E82E2;
+  cursor: pointer;
+  color: white;
+  outline: none;
+  font-weight: bold;
+  user-select: none;
+  font-family: 'Oswald', sans-serif;
+  box-shadow: inset 0px 0px 0px 3px lighten(black, 20%);
+  transition: box-shadow 0.2s ease;
+  font-size: 40px;
+
+  &:hover {
+    box-shadow: inset 0px 0px 0px 5px lighten(black, 20%);
+  }
+
+  &:active {
+    background-color: darken(#6E82E2, 5%)
+  }
+}
