@@ -92,6 +92,7 @@ export const SocketProvider = ({ children }) => {
 			setGameCode("")
 			setGamestate("join_game")
 			setPlayer({})
+			setLetters("")
 		}
 	}
 
