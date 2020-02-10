@@ -2,16 +2,6 @@
   align-items: center;
   padding: 30px;
 
-  .game-title {
-    font-family: 'Oswald', sans-serif;
-    margin-bottom: 20px;
-    text-align: center;
-
-    @media only screen and (max-width: 360px) {
-      font-size: 27px;
-    }
-  }
-
   .game-inputs {
     display: flex;
     flex-direction: column;
@@ -61,9 +51,13 @@
       font-weight: 400;
     }
 
+    span, h1 {
+      font-family: 'Oswald', sans-serif;
+    }
+
     p {
       font-weight: 400;
-      margin-top: 20px;
+      margin-top: 10px;
     }
   }
 }
