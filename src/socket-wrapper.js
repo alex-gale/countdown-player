@@ -10,8 +10,10 @@ export const SocketProvider = ({ children }) => {
 	const [gameCode, setGameCode] = useState("")
 	const [gamestate, setGamestate] = useState("join_game")
 	const [player, setPlayer] = useState({})
+	const [currentAnswer, setCurrentAnswer] = useState("")
 	const [error, setError] = useState("")
 	const [letters, setLetters] = useState("")
+	const [loading, setLoading] = useState(false)
 
 	const handleError = (err, webSoc) => {
 		setError(err.msg)
@@ -44,12 +46,12 @@ export const SocketProvider = ({ children }) => {
 		setPlayer(playerData)
 	}
 
-	const startRound = (letters) => {
-		setGamestate("round")
-		setLetters(letters)
+	const submitAnswer = (answer) => {
+		ws.send(JSON.stringify({ type: "round_answer", "data": answer }))
 	}
 
 	const connect = (username, game_code) => {
+		setLoading(true)
 		setError("")
 
 		if (ws) {
@@ -61,6 +63,7 @@ export const SocketProvider = ({ children }) => {
 
 		webSoc.onopen = () => {
 			setWS(webSoc)
+			setLoading(false)
 		}
 
 		webSoc.onmessage = (event) => {
@@ -80,10 +83,17 @@ export const SocketProvider = ({ children }) => {
 					joinGame(data)
 					break
 				case "round_start":
-					startRound(data.letters)
+					setGamestate("round")
+					setLetters(data.letters)
+					break
+				case "answer_confirm":
+					setCurrentAnswer(data)
+					break
+				case "round_end":
+					setGamestate("round_results")
 					break
 				default:
-					console.error("Invalid websocket message received")
+					console.error(`Invalid websocket message received - ${type}`)
 			}
 		}
 
@@ -104,7 +114,10 @@ export const SocketProvider = ({ children }) => {
 				gameCode,
 				player,
 				error,
-				letters
+				letters,
+				currentAnswer,
+				submitAnswer,
+				loading
 			}}
 		>
 			{children}

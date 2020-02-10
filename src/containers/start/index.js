@@ -57,7 +57,9 @@ class Start extends React.Component {
 								/>
 
 								<div className="join-action">
-									<Button submit="true">Join</Button>
+									<Button submit="true" disabled={this.context.loading}>
+										{this.context.loading ? "Loading..." : "Join"}
+									</Button>
 									<span className={`error-message ${error && "display"}`}>{error}</span>
 								</div>
 							</form>
