@@ -11,6 +11,8 @@ export const SocketProvider = ({ children }) => {
 	const [gamestate, setGamestate] = useState("join_game")
 	const [player, setPlayer] = useState({})
 	const [currentAnswer, setCurrentAnswer] = useState("")
+	const [answerFeedback, setAnswerFeedback] = useState({ dict: false, letters: false, top_answer: false })
+	const [score, setScore] = useState(0)
 	const [error, setError] = useState("")
 	const [letters, setLetters] = useState("")
 	const [loading, setLoading] = useState(false)
@@ -35,7 +37,7 @@ export const SocketProvider = ({ children }) => {
 	}
 
 	const joinGame = (game_data) => {
-		const playerData = { username: game_data.username, id: game_data.user_id, score: 0 }
+		const playerData = { username: game_data.username, id: game_data.user_id }
 
 		setGameCode(game_data.game_code)
 		setGamestate("waiting")
@@ -44,6 +46,18 @@ export const SocketProvider = ({ children }) => {
 
 	const submitAnswer = (answer) => {
 		ws.send(JSON.stringify({ type: "round_answer", "data": answer }))
+	}
+
+	const processResults = (results) => {
+		if (results.feedback.top_answer) {
+			setCurrentAnswer(answer => {
+				setScore(score => score + answer.length)
+
+				return answer
+			})
+		}
+
+		setAnswerFeedback(results.feedback)
 	}
 
 	const connect = (username, game_code) => {
@@ -90,6 +104,9 @@ export const SocketProvider = ({ children }) => {
 				case "round_end":
 					setGamestate("round_over")
 					break
+				case "round_feedback":
+					processResults(data)
+					break
 				default:
 					console.error(`Invalid websocket message received - ${type}`)
 			}
@@ -114,6 +131,8 @@ export const SocketProvider = ({ children }) => {
 				error,
 				letters,
 				currentAnswer,
+				score,
+				answerFeedback,
 				submitAnswer,
 				loading,
 				setGamestate
