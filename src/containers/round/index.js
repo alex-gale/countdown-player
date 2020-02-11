@@ -47,6 +47,7 @@ class Round extends React.Component {
 								label="Answer"
 								value={answer}
 								onChange={e => this.setState({ answer: e.target.value })}
+								maxLength={9}
 								required
 							/>
 
