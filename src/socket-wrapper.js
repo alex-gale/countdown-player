@@ -29,10 +29,6 @@ export const SocketProvider = ({ children }) => {
 				webSoc.close()
 				break
 
-			case 12:
-				// can't accept answer
-				break
-
 			default:
 				console.error("Invalid error received from server")
 		}
@@ -86,12 +82,13 @@ export const SocketProvider = ({ children }) => {
 					setGamestate("round")
 					setLetters(data.letters)
 					setCurrentAnswer("")
+					setError("")
 					break
 				case "answer_confirm":
 					setCurrentAnswer(data)
 					break
 				case "round_end":
-					setGamestate("round_results")
+					setGamestate("round_over")
 					break
 				default:
 					console.error(`Invalid websocket message received - ${type}`)
@@ -118,7 +115,8 @@ export const SocketProvider = ({ children }) => {
 				letters,
 				currentAnswer,
 				submitAnswer,
-				loading
+				loading,
+				setGamestate
 			}}
 		>
 			{children}

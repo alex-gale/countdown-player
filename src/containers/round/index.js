@@ -57,7 +57,7 @@ class Round extends React.Component {
 								<span className={`error-message ${error && "display"}`}>{error}</span>
 							</div>
 						</form>
-					: <div className="answer-info">Your answer: <span className="bold">{currentAnswer.toUpperCase()}</span></div>
+					: <div className="answer-info">Answer submitted</div>
 			}
 			</div>
 		)
