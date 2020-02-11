@@ -1,4 +1,117 @@
 .round-results-container {
   align-items: center;
   padding: 30px;
+
+  .no-answer-message {
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .answer-container {
+    text-align: center;
+
+    h1 {
+      font-family: 'Oswald', sans-serif;
+    }
+  }
+
+  .feedback-container {
+    margin-top: 20px;
+
+    .dictionary-container, .letters-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      p {
+        font-family: 'Oswald', sans-serif;
+        font-size: 20px;
+      }
+
+      .feedback-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: whitesmoke;
+        min-width: 75px;
+        height: 75px;
+        border: 5px solid lighten(black, 20%);
+        margin-right: 10px;
+
+        .tick {
+          position: relative;
+          transform: rotate(45deg);
+          margin-left: -15px;
+          margin-top: -15px;
+
+          &:before {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 50px;
+            background-color: green;
+            left: 11px;
+            top: -28px;
+          }
+
+          &:after {
+            content: "";
+            position: absolute;
+            width: 23px;
+            height: 10px;
+            background-color: green;
+            left: -3px;
+            top: 12px;
+          }
+        }
+
+        .cross {
+          position: relative;
+          transform: rotate(45deg);
+          //margin-left: -25px;
+          margin-top: -13px;
+
+          &:before {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 50px;
+            background-color: red;
+            top: -20px;
+          }
+
+          &:after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 10px;
+            background-color: red;
+            left: -20px;
+          }
+        }
+      }
+    }
+  }
+
+  .score-container {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 30px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+
+    .score-change {
+      position: absolute;
+      color: rgba(0, 0, 0, 0.3);
+      margin-left: -30px;
+      opacity: 0;
+      transition: all 1s ease;
+      grid-column: 5;
+      bottom: 0;
+
+      &.display {
+        opacity: 1;
+        margin-left: 10px;
+      }
+    }
+  }
 }

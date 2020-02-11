@@ -8,9 +8,9 @@ export const useSocket = () => useContext(SocketContext)
 export const SocketProvider = ({ children }) => {
 	const [ws, setWS] = useState()
 	const [gameCode, setGameCode] = useState("")
-	const [gamestate, setGamestate] = useState("round_results")
+	const [gamestate, setGamestate] = useState("join_game")
 	const [player, setPlayer] = useState({})
-	const [currentAnswer, setCurrentAnswer] = useState("ambulance")
+	const [currentAnswer, setCurrentAnswer] = useState("")
 	const [answerFeedback, setAnswerFeedback] = useState({ dict: false, letters: false, top_answer: false })
 	const [score, setScore] = useState(0)
 	const [error, setError] = useState("")
@@ -50,7 +50,11 @@ export const SocketProvider = ({ children }) => {
 
 	const processResults = (results) => {
 		if (results.feedback.top_answer) {
-			setScore(score => score + currentAnswer.length)
+			setCurrentAnswer(answer => {
+				setScore(score => score + answer.length)
+
+				return answer
+			})
 		}
 
 		setAnswerFeedback(results.feedback)
@@ -100,7 +104,7 @@ export const SocketProvider = ({ children }) => {
 				case "round_end":
 					setGamestate("round_over")
 					break
-				case "round_results":
+				case "round_feedback":
 					processResults(data)
 					break
 				default:
