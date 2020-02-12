@@ -18,13 +18,21 @@ class Round extends React.Component {
 		}
 
 		this.submitAnswer = this.submitAnswer.bind(this)
+		this.updateAnswer = this.updateAnswer.bind(this)
 	}
 
 	submitAnswer(e) {
 		e.preventDefault()
 
 		this.context.submitAnswer(this.state.answer)
+	}
 
+	updateAnswer(e) {
+		const re = /([A-Za-z])$/
+
+		if (e.target.value === "" || re.test(e.target.value)) {
+			this.setState({ answer: e.target.value })
+		}
 	}
 
 	render() {
@@ -46,7 +54,7 @@ class Round extends React.Component {
 							<TextInput
 								label="Answer"
 								value={answer}
-								onChange={e => this.setState({ answer: e.target.value })}
+								onChange={this.updateAnswer}
 								maxLength={9}
 								required
 							/>

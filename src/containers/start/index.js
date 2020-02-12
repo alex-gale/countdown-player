@@ -25,6 +25,14 @@ class Start extends React.Component {
 		}
 	}
 
+	updateUsername(e) {
+		const re = /([A-Za-z0-9.?,!])/
+
+		if ((e.target.value === "" || re.test(e.target.value)) && this.state.username.length <= 25) {
+			this.setState({ username: e.target.value })
+		}
+	}
+
 	onSubmit(e) {
 		e.preventDefault()
 
@@ -45,7 +53,7 @@ class Start extends React.Component {
 								<TextInput
 									label="Username"
 									value={username}
-									onChange={e => this.setState({ username: e.target.value })}
+									onChange={this.updateUsername.bind(this)}
 									required
 								/>
 								<TextInput
