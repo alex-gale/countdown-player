@@ -85,11 +85,6 @@ export const SocketProvider = ({ children }) => {
 					handleError(data, webSoc)
 					break
 				case "game_data":
-					if (data.user_type === "host") {
-						setError("No game in progress")
-						return webSoc.close()
-					}
-
 					joinGame(data)
 					break
 				case "round_start":
