@@ -118,6 +118,8 @@ export const SocketProvider = ({ children }) => {
 			setGamestate("join_game")
 			setPlayer({})
 			setLetters("")
+			setScore(0)
+			setAnswerFeedback({ dict: false, letters: false, top_answer: false })
 		}
 	}
 

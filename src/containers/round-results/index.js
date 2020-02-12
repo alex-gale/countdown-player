@@ -51,6 +51,10 @@ class RoundResults extends React.Component {
 				}
 
 				<div className="score-container">
+          <div className="good-answer-message">
+            {this.context.answerFeedback.top_answer && this.context.currentAnswer ? "Good answer!" : null}
+          </div>
+
 					Score: <span className="bold">{this.context.score}</span>
 					<span className={`score-change ${this.state.scoreChangeDisplay ? 'display' : null}`}>
 						{this.context.answerFeedback.top_answer && this.context.currentAnswer ? `+${this.context.currentAnswer.length}` : null}
