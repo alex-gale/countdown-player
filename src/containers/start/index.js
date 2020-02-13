@@ -74,8 +74,8 @@ class Start extends React.Component {
 
 						: this.context.gamestate === "waiting"
 							? <div className="welcome-display">
-									<h1>Welcome to Countdown, <span className="underline bold">{this.context.player.username}</span></h1>
-									<p>Game will be starting soon</p>
+									<h1>Welcome {this.context.score > 0 ? "back" : null} to Countdown, <span className="underline bold">{this.context.player.username}</span></h1>
+									<p>{this.context.score > 0 ? `You have ${this.context.score} points.` : null} Round will be starting soon!</p>
 								</div>
 							: null
 				}
@@ -84,6 +84,7 @@ class Start extends React.Component {
 	}
 }
 
+// inject player and gamecode into props so that constructor can access them
 export default React.forwardRef((props, ref) => {
 	return (
 		<SocketContext.Consumer>
