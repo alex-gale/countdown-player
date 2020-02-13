@@ -9,7 +9,7 @@ export const SocketProvider = ({ children }) => {
 	const [ws, setWS] = useState()
 	const [gameCode, setGameCode] = useState("")
 	const [gamestate, setGamestate] = useState("join_game")
-	const [player, setPlayer] = useState({})
+	const [player, setPlayer] = useState({ username: "" })
 	const [currentAnswer, setCurrentAnswer] = useState("")
 	const [answerFeedback, setAnswerFeedback] = useState({ dict: false, letters: false, top_answer: false })
 	const [score, setScore] = useState(0)
@@ -34,14 +34,6 @@ export const SocketProvider = ({ children }) => {
 			default:
 				console.error("Invalid error received from server")
 		}
-	}
-
-	const joinGame = (game_data) => {
-		const playerData = { username: game_data.username, id: game_data.user_id }
-
-		setGameCode(game_data.game_code)
-		setGamestate("waiting")
-		setPlayer(playerData)
 	}
 
 	const submitAnswer = (answer) => {
@@ -85,7 +77,10 @@ export const SocketProvider = ({ children }) => {
 					handleError(data, webSoc)
 					break
 				case "game_data":
-					joinGame(data)
+					setGameCode(data.game_code)
+					setGamestate("waiting")
+					setPlayer({ username: data.username })
+					setScore(data.score)
 					break
 				case "round_start":
 					setGamestate("round")
@@ -109,9 +104,7 @@ export const SocketProvider = ({ children }) => {
 
 		webSoc.onclose = () => {
 			setWS(null)
-			setGameCode("")
 			setGamestate("join_game")
-			setPlayer({})
 			setLetters("")
 			setScore(0)
 			setAnswerFeedback({ dict: false, letters: false, top_answer: false })

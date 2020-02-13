@@ -12,8 +12,8 @@ class Start extends React.Component {
 		super(props)
 
 		this.state = {
-			username: "",
-			game_code: ""
+			username: this.props.player.username,
+			game_code: this.props.code
 		}
 	}
 
@@ -84,4 +84,10 @@ class Start extends React.Component {
 	}
 }
 
-export default Start
+export default React.forwardRef((props, ref) => {
+	return (
+		<SocketContext.Consumer>
+			{socket => <Start player={socket.player} code={socket.gameCode} />}
+		</SocketContext.Consumer>
+	)
+})
