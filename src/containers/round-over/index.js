@@ -13,7 +13,7 @@ class RoundOver extends React.Component {
 	render() {
 		return (
 			<div className="page-container round-over-container">
-				<h1 className="game-title"><span role="img" aria-label="clock">🕧</span> Countdown Online</h1>
+				<h1 className="game-title"><span role="img" aria-label="clock">🕑</span> Countdown Online</h1>
 
 				<h2>Round Over!</h2>
 			</div>

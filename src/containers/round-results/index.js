@@ -21,7 +21,7 @@ class RoundResults extends React.Component {
   render() {
     return (
       <div className="page-container round-results-container">
-        <h1 className="game-title"><span role="img" aria-label="clock">🕧</span> Countdown Online</h1>
+        <h1 className="game-title"><span role="img" aria-label="clock">🕑</span> Countdown Online</h1>
 
 				{
 					this.context.currentAnswer

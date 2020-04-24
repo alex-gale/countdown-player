@@ -41,7 +41,7 @@ class Round extends React.Component {
 
 		return (
 			<div className="page-container round-container">
-				<h1 className="game-title"><span role="img" aria-label="clock">🕧</span> Countdown Online</h1>
+				<h1 className="game-title"><span role="img" aria-label="clock">🕑</span> Countdown Online</h1>
 
 				<div className="letters-container">
 					{this.context.letters.split("").map(letter => <div className="letter" key={shortid.generate()}>{letter}</div>)}

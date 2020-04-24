@@ -45,7 +45,7 @@ class Start extends React.Component {
 
 		return (
 			<div className="page-container start-container">
-				<h1 className="game-title"><span role="img" aria-label="clock">🕧</span> Countdown Online</h1>
+				<h1 className="game-title"><span role="img" aria-label="clock">🕑</span> Countdown Online</h1>
 
 				{
 					this.context.gamestate === "join_game"
